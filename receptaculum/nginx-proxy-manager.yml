@@ -9,9 +9,11 @@ services:
       - '81:81' # Admin Web Port
     volumes:
       - data:/data
+      - letsencrypt:/etc/letsencrypt
 
 volumes:
   data:
+  letsencrypt:
   
 networks:
   shared_network
