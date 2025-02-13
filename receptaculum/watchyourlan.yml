@@ -1,0 +1,22 @@
+services:
+  watchyourlan:
+    image: aceberg/watchyourlan
+    container_name: watchyourlan-1
+    #ports:
+    #  - "8840:8840"  # Expose the web interface
+    environment:
+      - LOG_LEVEL=info
+      - IFACES=eth0
+      - TZ=Europe/Rome
+    network_mode: "host"
+    volumes:
+      - data:/data/WatchYourLAN  # Use the defined volume
+    networks:
+      - shared_network
+      
+volumes:
+  data:
+
+networks:
+  shared_network:
+    external: true
