@@ -6,12 +6,12 @@ services:
     #ports:
     #  - "7575:7575"  # Expose the web interface
     volumes:
-      - data:/app/data  # Persist Homarr data
+      - data:/app/data
     networks:
       - shared_network
 
 volumes:
-  data:  # Volume for Homarr data
+  data:
 
 networks:
   shared_network:
