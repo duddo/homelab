@@ -10,12 +10,14 @@ services:
     volumes:
       - data:/data
       - letsencrypt:/etc/letsencrypt
+    networks:
+      - shared_network
 
 volumes:
   data:
   letsencrypt:
   
 networks:
-  shared_network
+  shared_network:
     external: true
         
