@@ -6,11 +6,15 @@ services:
     #ports:
     #  - "7575:7575"  # Expose the web interface
     volumes:
-      - data:/app/data
+      - appdata:/app/data
+      - configs:/app/data/configs
+      - data:/data
     networks:
       - shared_network
 
 volumes:
+  appdata:
+  configs:
   data:
 
 networks:
