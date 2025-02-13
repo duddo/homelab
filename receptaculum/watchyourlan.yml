@@ -11,12 +11,6 @@ services:
     network_mode: "host"
     volumes:
       - data:/data/WatchYourLAN  # Use the defined volume
-    networks:
-      - shared_network
       
 volumes:
   data:
-
-networks:
-  shared_network:
-    external: true
