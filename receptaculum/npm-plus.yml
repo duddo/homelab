@@ -1,0 +1,23 @@
+services:
+  npmplus:
+    container_name: npm-plus-1
+    image: docker.io/zoeyvid/npmplus:latest
+    restart: always
+    ports:
+      - 81:81
+      - 80:80
+      - 443:443
+    volumes:
+      - data:/data
+    environment:
+      - "TZ=Europe/Rome"
+      - "ACME_EMAIL=davide@totaro.net" 
+    networks:
+      - shared_network
+
+volumes:
+  data:
+
+networks:
+  shared_network:
+    external: true
