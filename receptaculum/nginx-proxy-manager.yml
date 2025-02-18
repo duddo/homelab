@@ -12,7 +12,8 @@ services:
       - letsencrypt:/etc/letsencrypt
     networks:
       - shared_network
-
+#default user: admin@example.com
+#default password: changeme
 volumes:
   data:
   letsencrypt:
