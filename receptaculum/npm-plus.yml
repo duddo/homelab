@@ -1,7 +1,7 @@
 services:
   npmplus:
-    container_name: npm-plus-1
     image: docker.io/zoeyvid/npmplus:latest
+    container_name: npm-plus-1
     restart: always
     ports:
       - 81:81
