@@ -17,11 +17,11 @@ services:
       - PGID=0
       - TZ=Europe/Rome
     networks:
-      - qbittorrent
+      - default_network
 
 volumes:
   config:  # Volume for qBittorrent configuration and data
 
 networks:
-  qbittorrent:
+  default_network:
     driver: bridge
