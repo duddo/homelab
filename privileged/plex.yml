@@ -1,0 +1,20 @@
+services:
+  plex:
+    image: plexinc/pms-docker
+    container_name: plex-1
+    restart: unless-stopped
+    network_mode: host  # Recommended for Plex to simplify network configuration (e.g., DLNA, multicast)
+    environment:
+      - PLEX_UID=0  # Set to root
+      - PLEX_GID=0  # Set to root
+      - TZ=Europe/Rome  # Set your timezone
+    volumes:
+      - config:/config   # Plex configuration files in a Docker volume
+      - transcode:/transcode  # Temporary transcode directory in a Docker volume
+      - /mnt/NAS:/media  # Replace with your NAS media directory
+    devices:
+      - /dev/dri:/dev/dri  # For Intel hardware transcoding
+
+volumes:
+  config:
+  transcode:
