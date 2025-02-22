@@ -1,0 +1,27 @@
+services:
+  qbittorrent:
+    image: linuxserver/qbittorrent:latest
+    container_name: qbittorrent-1
+    restart: unless-stopped
+    ports:
+      - "8080:8080"  # Web UI
+      - "6881:6881"  # BitTorrent protocol
+      - "6881:6881/udp"  # BitTorrent (UDP)
+    volumes:
+      - config:/config
+      - /root/downloads:/local-downloads
+      - /mnt/NAS:/NAS
+    environment:
+      - WEBUI_PORT=8080
+      - PUID=0
+      - PGID=0
+      - TZ=Europe/Rome
+    networks:
+      - qbittorrent
+
+volumes:
+  config:  # Volume for qBittorrent configuration and data
+
+networks:
+  qbittorrent:
+    driver: bridge
