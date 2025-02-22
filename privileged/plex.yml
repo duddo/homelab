@@ -14,7 +14,13 @@ services:
       - /mnt/NAS:/media  # Replace with your NAS media directory
     devices:
       - /dev/dri:/dev/dri  # For Intel hardware transcoding
-
+    networks:
+      - default_network
+      
 volumes:
   config:
   transcode:
+
+networks:
+  default_network:
+    driver: bridge
