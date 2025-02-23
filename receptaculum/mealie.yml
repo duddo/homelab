@@ -1,0 +1,26 @@
+services:
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:v2.6.0 # 
+    container_name: mealie-1
+    restart: unless-stopped
+    #ports:
+    #    - "9925:9000"
+    deploy:
+      resources:
+        limits:
+          memory: 600M # 
+    volumes:
+      - data:/app/data/
+    environment:
+      ALLOW_SIGNUP: "true"
+      TZ: Europe/Rome
+      BASE_URL: http://mealie.receptaculum.local
+    networks:
+      - shared_network
+
+volumes:
+  data:
+
+networks:
+  shared_network:
+    external: true
