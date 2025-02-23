@@ -1,0 +1,20 @@
+services:
+  smokeping:
+    image: lscr.io/linuxserver/smokeping:latest
+    container_name: smokeping-1
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Rome
+    volumes:
+      - config:/config
+      - data:/data
+    networks:
+       - shared_network
+
+volumes:
+  config:
+  data:
+
+networks:
+  shared_network:
+    external: true
