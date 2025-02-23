@@ -3,6 +3,8 @@ services:
     image: lscr.io/linuxserver/smokeping:latest
     container_name: smokeping-1
     restart: unless-stopped
+    #ports:
+    #    - "8090:80"
     environment:
       - TZ=Europe/Rome
     volumes:
