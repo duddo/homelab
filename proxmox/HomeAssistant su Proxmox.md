@@ -15,4 +15,20 @@ qm importdisk 200 haos-image/haos_ova-15.2.qcow2 local-lvm
 qm set 200 -efidisk0 local-lvm:vm-200-disk-0,efitype=4m -scsi0 local-lvm:vm-200-disk-1,cache=writethrough,discard=on,ssd=1,size=32G -boot order=scsi0 -description "Home Assistant OS"
 
 qm start 200
+
+```
+
+attacca la usb, poi
+```
+lsusb
+```
+Perfect! Your SONOFF Zigbee 3.0 USB Dongle Plus V2 has:
+Vendor ID: 1a86
+Product ID: 55d4
+
+```
+qm set 200 -usb0 host=1a86:55d4
+
+qm stop 200
+qm start 200
 ```
