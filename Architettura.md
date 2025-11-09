@@ -16,31 +16,32 @@ e che tutti i servizi siano su VM o CT sul server.
 
 Indirizzi IP e macchine fisiche nella rete:
 
-| Nome    | IP            | FQDN          |
-|---------|---------------|---------------|
-| NAS     | 192.168.1.100 | nas.local     |
-| proxmox | 192.168.1.10  | proxmox.local |
-| Router  | 192.168.1.1   | router.local  |
+| Nome    | IP            | FQDN                    |
+|---------|---------------|-------------------------|
+| NAS     | 192.168.1.100 | nas.casa.totaro.net     |
+| proxmox | 192.168.1.10  | proxmox.casa.totaro.net |
+| Router  | 192.168.1.1   | router.casa.totaro.net  |
 
 ## DNS E DHCP
 
-Gli FQDN `*.local` assegnati sono risolvibili solo all'interno della rete locale. Il server DNS che li risolve è
-installato sul NAS. Per assicurarsi che tutte le macchine ottengano il DNS corretto, è stato disabilitato il DHCP 
-server sul router e il NAS regge un suo DHCP server. Questo assegna gli indirizzi ip dando 192.168.1.100 come DNS primario.
+Gli FQDN `*.casa.totaro.net` risolvono solo IP locali. Il server DNS che li risolve è Cloudflare, su dominio proprietario.
+Prcedentemente gli indirizzi erano `*.local`, risolti tramite server DNS su NAS. Lo stesso nas faceva da DHCP server.
+Questo assegnava gli indirizzi ip dando 192.168.1.100 come DNS primario.
+Per semplificare l'architettura di rete, ci si affida adesso al DNS pubblico di Cloudflare.
 
 ## Macchine e servizi
 
 Servizi esposti dalle macchine:
 
-| Nome           | IP            | FQDN                | Descrizione                               |
-|----------------|---------------|---------------------|-------------------------------------------|
-| Proxmox        | 192.168.1.10  | proxmox.local       | Via http su 8006                          |
-| NAS            | 192.168.1.100 | nas.local           | Via http su 5000                          |
-| Receptaculum   | 192.168.1.30  | receptaculum.local  | CT, Debian, Docker, non accede al NAS     |
-| Privileged     | 192.168.1.31  | privileged.local    | CT, Debian, Docker, accede al NAS         |
-| Exit Node      | 192.168.1.40  | exitnode.local      | CT, Alpine, Tailscale, niente NAS         |
-| Flaria         | 192.168.1.32  | flaria.local        | CT, Debian, Cloudflare tunnel, niente NAS |
-| Home Assistant | 192.168.1.200 | homeassistant.local | VM, HAOS, dedicata a HA                   |
+| Nome           | IP            | FQDN                          | Descrizione                               |
+|----------------|---------------|-------------------------------|-------------------------------------------|
+| Proxmox        | 192.168.1.10  | proxmox.casa.totaro.net       | Via http su 8006                          |
+| NAS            | 192.168.1.100 | nas.casa.totaro.net           | Via http su 5000                          |
+| Receptaculum   | 192.168.1.30  | receptaculum.casa.totaro.net  | CT, Debian, Docker, non accede al NAS     |
+| Privileged     | 192.168.1.31  | privileged.casa.totaro.net    | CT, Debian, Docker, accede al NAS         |
+| Exit Node      | 192.168.1.40  | exitnode.casa.totaro.net      | CT, Alpine, Tailscale, niente NAS         |
+| Flaria         | 192.168.1.32  | flaria.casa.totaro.net        | CT, Debian, Cloudflare tunnel, niente NAS |
+| Home Assistant | 192.168.1.200 | homeassistant.casa.totaro.net | VM, HAOS, dedicata a HA                   |
 
 Tutte queste macchine accettano connessioni SSH solo tramite chiavi, salvate su 1Password.
 
