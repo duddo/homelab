@@ -48,7 +48,7 @@ Tutte queste macchine accettano connessioni SSH solo tramite chiavi, salvate su 
 ## Storage e Backup
 
 Lo storage è diviso in condivisioni Synology per poter regolare utenze d'accesso e quota. Sia la condivisione dati che
-quella backup sono connesse a proxmox tramite NFS. Una condivisione Timemachine è usata per il solo backup del Mac.
+quella backup sono connesse a proxmox tramite SMB. Una condivisione Timemachine è usata per il solo backup del Mac.
 Tutte le VM e CT sono periodicamente backuppate sul NAS da proxmox. Periodicamente viene manualmente connesso un disco
 USB esterno al NAS, il quale tramite trigger automatico ci copia sopra i dati da proteggere.
 
