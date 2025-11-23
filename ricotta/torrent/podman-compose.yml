@@ -1,0 +1,25 @@
+services:
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    restart: unless-stopped
+    ports:
+      - 8080:8080      # Web UI
+      - 6881:6881      # BitTorrent protocol
+      - 6881:6881/udp  # BitTorrent (UDP)
+    volumes:
+      - /root/volumes/qbittorrent/config:/config
+      - /root/torrent-local-downloads:/local-downloads
+      - /mnt/dati:/dati
+    environment:
+      - WEBUI_PORT=8080
+      - TZ=Europe/Rome
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    restart: unless-stopped
+    ports:
+      - 9117:9117
+    environment:
+      - TZ=Europe/Rome
+    volumes:      
+      - /root/volumes/jackett/config:/config
+

@@ -1,0 +1,19 @@
+{
+    acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+    log {
+    	level debug
+    }
+}
+
+casa.totaro.net {
+    reverse_proxy host.containers.internal:5005
+}
+
+qbittorrent.casa.totaro.net {
+    reverse_proxy host.containers.internal:8080
+}
+
+jackett.casa.totaro.net {
+    reverse_proxy host.containers.internal:9117
+}
+

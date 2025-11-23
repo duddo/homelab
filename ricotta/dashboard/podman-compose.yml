@@ -1,0 +1,10 @@
+services:
+  flame:
+    image: docker.io/pawelmalak/flame
+    volumes:
+      - /root/volumes/flame/data:/app/data
+    ports:
+      - 5005:5005
+    environment:
+      - PASSWORD=flame_password #TODO: pass as env var
+    restart: unless-stopped

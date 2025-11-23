@@ -1,0 +1,13 @@
+services:
+  caddy:
+    image: docker.io/caddybuilds/caddy-cloudflare:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - /root/volumes/caddy/data:/data
+      - /root/volumes/caddy/config:/config
+    env_file:
+      - /root/vars.env
