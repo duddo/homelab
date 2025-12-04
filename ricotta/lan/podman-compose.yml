@@ -1,0 +1,14 @@
+services:
+  watchyourlan:
+    image: docker.io/aceberg/watchyourlan
+    volumes:
+      - /root/volumes/watchyourlan/data:/data/WatchYourLAN
+    ports:
+      - 8840:8840
+    environment:
+      - LOG_LEVEL=debug
+      - IFACES=eth0
+      - TZ=Europe/Rome
+    restart: unless-stopped
+    network_mode: host
+    privileged: true
