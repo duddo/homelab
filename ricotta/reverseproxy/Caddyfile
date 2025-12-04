@@ -17,3 +17,7 @@ jackett.casa.totaro.net {
     reverse_proxy host.containers.internal:9117
 }
 
+mealie.casa.totaro.net {
+    reverse_proxy host.containers.internal:9000
+}
+
