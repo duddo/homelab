@@ -21,3 +21,10 @@ mealie.casa.totaro.net {
     reverse_proxy host.containers.internal:9000
 }
 
+wyl.casa.totaro.net {
+    reverse_proxy host.containers.internal:8840
+}
+
+stump.casa.totaro.net {
+    reverse_proxy host.containers.internal:10801
+}

@@ -1,0 +1,13 @@
+services:
+  stump:
+    image: docker.io/aaronleopold/stump:latest
+    restart: unless-stopped
+    ports:
+      - 10801:10801
+    volumes:
+      - /root/volumes/stump/config:/config
+      - /mnt/dati/Fumetti:/mnt/dati/Fumetti:ro
+    environment:
+      - PUID=0
+      - PGID=0
+
