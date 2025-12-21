@@ -1,0 +1,16 @@
+services:
+  plex:
+    image: docker.io/plexinc/pms-docker
+    restart: unless-stopped
+    network_mode: host  # Recommended for Plex to simplify network configuration (e.g., DLNA, multicast)
+    # default port is 32400
+    environment:
+      - PLEX_UID=0  # root
+      - PLEX_GID=0  # root
+      - TZ=Europe/Rome
+    volumes:
+      - /root/volumes/plex/config:/config
+      - /mnt/dati:/mnt/dati
+    devices:
+      - /dev/dri:/dev/dri  # For Intel hardware transcoding
+
