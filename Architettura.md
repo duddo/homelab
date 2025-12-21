@@ -33,17 +33,24 @@ Per semplificare l'architettura di rete, ci si affida adesso al DNS pubblico di 
 
 Servizi esposti dalle macchine:
 
-| Nome           | IP            | FQDN                          | Descrizione                               |
-|----------------|---------------|-------------------------------|-------------------------------------------|
-| Proxmox        | 192.168.1.10  | proxmox.casa.totaro.net       | Via http su 8006                          |
-| NAS            | 192.168.1.100 | nas.casa.totaro.net           | Via http su 5000                          |
-| Receptaculum   | 192.168.1.30  | receptaculum.casa.totaro.net  | CT, Debian, Docker, non accede al NAS     |
-| Privileged     | 192.168.1.31  | privileged.casa.totaro.net    | CT, Debian, Docker, accede al NAS         |
-| Exit Node      | 192.168.1.40  | exitnode.casa.totaro.net      | CT, Alpine, Tailscale, niente NAS         |
-| Flaria         | 192.168.1.32  | flaria.casa.totaro.net        | CT, Debian, Cloudflare tunnel, niente NAS |
-| Home Assistant | 192.168.1.200 | homeassistant.casa.totaro.net | VM, HAOS, dedicata a HA                   |
+| Nome           | IP            | FQDN                          | Descrizione                                |
+|----------------|---------------|-------------------------------|--------------------------------------------|
+| Proxmox        | 192.168.1.10  | proxmox.casa.totaro.net       | Via http su 8006                           |
+| NAS            | 192.168.1.100 | nas.casa.totaro.net           | Via http su 5000                           |
+| Exit Node      | 192.168.1.40  | exitnode.casa.totaro.net      | CT, Alpine, Tailscale, niente NAS          |
+| Flaria         | 192.168.1.32  | flaria.casa.totaro.net        | CT, Debian, Cloudflare tunnel, niente NAS  |
+| Home Assistant | 192.168.1.200 | homeassistant.casa.totaro.net | VM, HAOS, dedicata a HA, NAS via SMB       |
+| Ricotta        | 192.168.1.33  | ricotta.casa.totaro.net       | CT, Debian, Podman, accesso completo a NAS |
 
 Tutte queste macchine accettano connessioni SSH solo tramite chiavi, salvate su 1Password.
+
+## Ricotta
+Principale LXCT container dove girano tutti i servizi self-hosted. Per fornire a Plex l'accelerazione hardware, queste due righe sono state aggiunte al file `/etc/pve/lxc/104.conf`:
+
+    lxc.cgroup2.devices.allow: c 226:* rwm
+    lxc.mount.entry: /dev/dri dev/dri none bind,optional,create=dir
+
+
 
 ## Storage e Backup
 
@@ -52,7 +59,6 @@ quella backup sono connesse a proxmox tramite SMB. Una condivisione Timemachine 
 Tutte le VM e CT sono periodicamente backuppate sul NAS da proxmox. Periodicamente viene manualmente connesso un disco
 USB esterno al NAS, il quale tramite trigger automatico ci copia sopra i dati da proteggere.
 
-## Docker
+## Podman
 
-Tutti i servizi Docker sono attivati tramite Portainer (tranne Portainer stesso, avviato da CLI).
-Per ogni servizio, esiste un file `.yml` in questo repository, dal quale Portainer attinge.
+Tutti i servizi Docker sono attivati tramite Podman via CLI. Per ogni servizio, esiste un file `.yml` nella cartella `ricotta`.
