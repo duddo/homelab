@@ -67,10 +67,16 @@ Similmente fare lo stesso per lo share di rete ‘Dati’.
 
 Tutti i servizi Docker sono attivati tramite Podman via CLI. Per ogni servizio, esiste un file `.yml` nella cartella `ricotta`.
 
-Per far diventare uno .yml un servizio:
+Per avviare uno stack:
 
 ```
-podman-compose systemd
+podman compose up
+```
+
+Per far diventare uno stack un servizio:
+
+```
+podman compose systemd
 systemctl daemon-reload
 systemctl --user enable --now podman-compose@straming
 ```

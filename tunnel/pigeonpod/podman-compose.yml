@@ -15,7 +15,7 @@ services:
       - cloudflare-pigeonpod
 
   cloudflare-tunnel:
-    image: ghcr.io/cloudflare/cloudflared:latest
+    image: docker.io/cloudflare/cloudflared:latest
     restart: unless-stopped
     command: tunnel run
     environment:
