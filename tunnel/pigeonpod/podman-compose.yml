@@ -2,14 +2,14 @@ services:
   pigeonpod:
     image: ghcr.io/aizhimou/pigeon-pod:latest
     restart: unless-stopped
-    user: root
     expose:
       - 8080
     volumes:
-      - /root/volumes/pigeonpod:/data:z
+      - /root/volumes/pigeonpod:/data
     environment:
       - TZ=Europe/Rome
       - PIGEON_BASE_URL=https://pigeonpod.totaro.net
+      - SPRING_DATASOURCE_URL=jdbc:sqlite:/data/pigeon-pod.db
     depends_on:
       - cloudflare-tunnel
     networks:
