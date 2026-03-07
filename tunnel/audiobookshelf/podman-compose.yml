@@ -10,7 +10,11 @@ services:
       - /root/volumes/audiobookshelf/metadata:/metadata
     environment:
       - TZ=Europe/Rome
-      
+    depends_on:
+      - cloudflare-tunnel
+    networks:
+      - cloudflare-audiobookshelf
+
   cloudflare-tunnel:
     image: docker.io/cloudflare/cloudflared:latest
     restart: unless-stopped
@@ -18,4 +22,7 @@ services:
     environment:
       - "TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}"
     networks:
-      - cloudflare-pigeonpod
+      - cloudflare-audiobookshelf
+
+networks:
+  cloudflare-audiobookshelf:
