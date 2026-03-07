@@ -2,10 +2,11 @@ services:
   pigeonpod:
     image: ghcr.io/aizhimou/pigeon-pod:latest
     restart: unless-stopped
+    user: root
     expose:
       - 8080
     volumes:
-      - /root/volumes/pigeonpod:/data
+      - /root/volumes/pigeonpod:/data:z
     environment:
       - TZ=Europe/Rome
       - PIGEON_BASE_URL=https://pigeonpod.totaro.net
