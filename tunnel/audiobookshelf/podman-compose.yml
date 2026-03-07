@@ -1,0 +1,21 @@
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    expose:
+      - 80
+    volumes:
+      - /root/volumes/audiobookshelf/audiobooks:/audiobooks
+      - /root/volumes/audiobookshelf/podcasts:/podcasts
+      - /root/volumes/audiobookshelf/config:/config
+      - /root/volumes/audiobookshelf/metadata:/metadata
+    environment:
+      - TZ=Europe/Rome
+      
+  cloudflare-tunnel:
+    image: docker.io/cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - "TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}"
+    networks:
+      - cloudflare-pigeonpod
