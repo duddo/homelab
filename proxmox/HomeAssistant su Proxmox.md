@@ -1,6 +1,7 @@
 # HomeAssistant su Proxmox
 
 Creata VM su Proxmox da riga di comando.
+
 ```
 wget https://github.com/home-assistant/operating-system/releases/download/${BRANCH}/haos_ova-${BRANCH}.qcow2.xz
 

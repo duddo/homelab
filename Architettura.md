@@ -9,7 +9,7 @@ Il sistema è composto da due computer fisici:
  - mini PC Firebat T8plus Intel N100, 16 GB, 512Gb
 
 Amichevolmente chiamati `NAS` e `proxmox`, sul primo è installato il software di default Synology DSM 7.
-Sul `promox` è installato il sistema operativo Proxmox. L’idea di base è che il `NAS` faccia da semplice storage 
+Sul `promox` è installato il sistema operativo Proxmox. L’idea di base è che il `NAS` faccia da semplice storage
 e che tutti i servizi siano su VM o CT sul server.
 
 ## Networking
@@ -50,8 +50,6 @@ Principale LXCT container dove girano tutti i servizi self-hosted. Per fornire a
     lxc.cgroup2.devices.allow: c 226:* rwm
     lxc.mount.entry: /dev/dri dev/dri none bind,optional,create=dir
 
-
-
 ## Storage e Backup
 
 Lo storage è diviso in condivisioni Synology per poter regolare utenze d'accesso e quota. Sia la condivisione dati che
@@ -59,6 +57,20 @@ quella backup sono connesse a proxmox tramite SMB. Una condivisione Timemachine 
 Tutte le VM e CT sono periodicamente backuppate sul NAS da proxmox. Periodicamente viene manualmente connesso un disco
 USB esterno al NAS, il quale tramite trigger automatico ci copia sopra i dati da proteggere.
 
+### Aggiungere NAS a Proxmox
+
+Da web interface Proxmox: Datacenter -> Storage -> Add SMB/CIFS. Inserire l’utente ‘backupowner’ per i backup. Viene quindi mostrato lo share di rete ‘Backup’ del NAS.
+
+Similmente fare lo stesso per lo share di rete ‘Dati’.
+
 ## Podman
 
 Tutti i servizi Docker sono attivati tramite Podman via CLI. Per ogni servizio, esiste un file `.yml` nella cartella `ricotta`.
+
+Per far diventare uno .yml un servizio:
+
+```
+podman-compose systemd
+systemctl daemon-reload
+systemctl --user enable --now podman-compose@straming
+```
