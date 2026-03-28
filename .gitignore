@@ -1,3 +1,4 @@
 .idea
 .vs
 *.env
+.DS_Store

@@ -80,3 +80,11 @@ podman-compose systemd --action create-unit
 podman-compose systemd -a register
 systemctl --user enable --now 'podman-compose@...nome...'
 ```
+
+Perchè i servizi sopravvivano ai reboot del CT, il linger deve essere abilitato per l'utente che gestisce i container (di solito `root`):
+
+```
+loginctl enable-linger root
+```
+
+Senza questo, i user units systemd non partono automaticamente al boot e i container rimangono giù fino al prossimo login manuale.
