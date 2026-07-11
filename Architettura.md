@@ -88,3 +88,22 @@ loginctl enable-linger root
 ```
 
 Senza questo, i user units systemd non partono automaticamente al boot e i container rimangono giù fino al prossimo login manuale.
+
+Per gestire uno stack registrato come servizio:
+
+```
+# Equivalente di podman-compose up
+systemctl --user start 'podman-compose@<nome>'
+
+# Equivalente di podman-compose down
+systemctl --user stop 'podman-compose@<nome>'
+
+# Restart
+systemctl --user restart 'podman-compose@<nome>'
+
+# Vedere lo stato
+systemctl --user status 'podman-compose@<nome>'
+
+# Vedere i log
+journalctl --user -u 'podman-compose@<nome>'
+```
