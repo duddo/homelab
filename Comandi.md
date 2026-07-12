@@ -40,6 +40,9 @@ podman image prune -f
 ## Gestire uno stack registrato come servizio
 
 ```
+# Elencare tutti gli stack registrati (anche quelli fermi)
+systemctl --user list-units --all 'podman-compose@*'
+
 # Avviare
 systemctl --user start 'podman-compose@<nome>'
 
