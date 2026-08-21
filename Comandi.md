@@ -10,7 +10,9 @@ Esempio con Plex (cartella `ricotta/streaming`):
 ```
 cd ricotta/streaming
 podman-compose pull
-systemctl --user restart 'podman-compose@streaming'
+systemctl --user stop 'podman-compose@streaming'
+podman-compose down
+systemctl --user start 'podman-compose@streaming'
 ```
 
 `podman-compose pull` scarica l'immagine aggiornata definita nel `podman-compose.yml`; il restart della unit systemd ricrea il container usando la nuova immagine (down + up), coerente con la gestione via systemd già in uso.
