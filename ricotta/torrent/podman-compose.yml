@@ -22,6 +22,14 @@ services:
       - 9117:9117
     environment:
       - TZ=Europe/Rome
-    volumes:      
+    volumes:
       - /root/volumes/jackett/config:/config
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    restart: unless-stopped
+    expose:
+      - 8191
+    environment:
+      - TZ=Europe/Rome
+      - LOG_LEVEL=info
 
