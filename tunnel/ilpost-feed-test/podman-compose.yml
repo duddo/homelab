@@ -1,0 +1,24 @@
+services:
+  ilpost-feed:
+    image: ghcr.io/duddo/ilpost-podcast-feed:latest
+    restart: unless-stopped
+    expose:
+      - 8080
+    environment:
+      - TZ=Europe/Rome
+    depends_on:
+      - cloudflare-tunnel
+    networks:
+      - cloudflare-ilpost-feed-test
+
+  cloudflare-tunnel:
+    image: docker.io/cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - "TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}"
+    networks:
+      - cloudflare-ilpost-feed-test
+
+networks:
+  cloudflare-ilpost-feed-test:
