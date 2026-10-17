@@ -73,10 +73,15 @@ Per avviare uno stack:
 podman compose up
 ```
 
+Predisporre Podman:
+
+```
+podman-compose systemd --action create-unit # una sola volta per la macchina
+```
+
 Per far diventare uno stack un servizio:
 
 ```
-podman-compose systemd --action create-unit
 podman-compose systemd -a register
 systemctl --user enable --now 'podman-compose@...nome...'
 ```
