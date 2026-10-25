@@ -1,0 +1,28 @@
+services:
+  wishlist:
+    image: ghcr.io/cmintey/wishlist:v0.69.0
+    restart: unless-stopped
+    expose:
+      - 3280
+    volumes:
+      - /root/volumes/wishlist/uploads:/usr/src/app/uploads
+      - /root/volumes/wishlist/data:/usr/src/app/data
+    environment:
+      - TZ=Europe/Rome
+      - ORIGIN=https://listanascita.totaro.net
+    depends_on:
+      - cloudflare-tunnel
+    networks:
+      - cloudflare-wishlist
+
+  cloudflare-tunnel:
+    image: docker.io/cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - "TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}"
+    networks:
+      - cloudflare-wishlist
+
+networks:
+  cloudflare-wishlist:
