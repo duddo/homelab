@@ -5,6 +5,14 @@ Tutti i comandi vanno eseguiti sulla macchina `ricotta` (o quella dove gira lo s
 
 ## Aggiornare l'immagine di un servizio
 
+Scorciatoia: lo script [update-stack.sh](update-stack.sh) esegue pull, ricreazione dei container (via systemd se la unit esiste, altrimenti `up -d`) e pulizia delle immagini vecchie:
+
+```
+./update-stack.sh ricotta/streaming
+```
+
+Di seguito i passaggi manuali equivalenti.
+
 Esempio con Plex (cartella `ricotta/streaming`):
 
 ```
